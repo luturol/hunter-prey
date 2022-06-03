@@ -6,7 +6,7 @@ namespace HunterAndPrey
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            new Game().Start();
         }
     }
 }
