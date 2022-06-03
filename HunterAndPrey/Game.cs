@@ -107,12 +107,27 @@ namespace HunterAndPrey
         public void PrintBoard()
         {
             Console.WriteLine();
-            for(int i = 0; i < 30; i++)
+            for (int i = 0; i < 30; i++)
             {
                 string row = string.Empty;
-                for(int j = 0; j < 30; j++)
+                for (int j = 0; j < 30; j++)
                 {
-                    row += Board[i, j].Content;
+                    // row += Board[i, j].Content;
+                    var cell = Board[i, j];
+                    if (cell is Hunter)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Green;
+                    }
+                    else if (cell is Prey)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Cyan;
+                    }
+                    else
+                    {
+                        Console.ForegroundColor = ConsoleColor.White;
+                    }
+                    
+                    Console.Write(Board[i, j].Content);
                 }
                 Console.WriteLine(row);
             }
