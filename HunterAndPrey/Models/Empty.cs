@@ -1,3 +1,5 @@
+using System;
+
 namespace HunterAndPrey.Models
 {
     public class Empty : Cell
@@ -5,6 +7,7 @@ namespace HunterAndPrey.Models
         public Empty()
         {
             Content = "[-]";
+            Color = ConsoleColor.White;
         }
     }
 }

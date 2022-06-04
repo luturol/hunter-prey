@@ -1,3 +1,5 @@
+using System;
+
 namespace HunterAndPrey.Models
 {
     public class Hunter : Cell
@@ -5,6 +7,7 @@ namespace HunterAndPrey.Models
         public Hunter()
         {
             Content = "[H]";
+            Color = ConsoleColor.Green;
         }
     }
 }

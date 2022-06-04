@@ -69,6 +69,7 @@ namespace HunterAndPrey
             }
 
             //Populando Caçador
+            Console.WriteLine("Colocando o Caçador");
             bool isHunterOnBoard = false;
             var hunter = new Hunter();
             while (isHunterOnBoard == false)
@@ -87,6 +88,7 @@ namespace HunterAndPrey
                 }
             }
 
+            Console.WriteLine("Populando com vazio o tabuleiro");
             for (int i = 0; i < 30; i++)
             {
                 for (int j = 0; j < 30; j++)
