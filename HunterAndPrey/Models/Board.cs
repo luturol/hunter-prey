@@ -1,11 +1,15 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using HunterAndPrey.Extensions;
 
 namespace HunterAndPrey.Models
 {
     public class Board
-    { 
+    {
         private Cell[,] _board;
+
+        public Hunter Hunter { get; private set; }
         public Board(int numberOfPreys, int xSize, int ySize)
         {
             _board = CreateBoard(numberOfPreys, xSize, ySize);
@@ -52,17 +56,17 @@ namespace HunterAndPrey.Models
             //Populando Caçador
             Console.WriteLine("Colocando o Caçador");
             bool isHunterOnBoard = false;
-            var hunter = new Hunter();
+            Hunter = new Hunter();
             while (isHunterOnBoard == false)
             {
                 (int randomX, int randomY) = board.GetRandomXAndY();
 
                 if (board[randomX, randomY] == null)
                 {
-                    hunter.X = randomX;
-                    hunter.Y = randomY;
+                    Hunter.X = randomX;
+                    Hunter.Y = randomY;
 
-                    board[randomY, randomX] = hunter;
+                    board[randomY, randomX] = Hunter;
                     isHunterOnBoard = true;
 
                     Console.WriteLine($"Colocou Caçador na posição X = {randomX} e Y = {randomY}");
@@ -97,11 +101,44 @@ namespace HunterAndPrey.Models
                 {
                     // row += Board[i, j].Content;
                     var cell = _board[i, j];
-                    Console.ForegroundColor = cell.Color;                    
+                    Console.ForegroundColor = cell.Color;
                     Console.Write(_board[i, j].Content);
                 }
                 Console.WriteLine(row);
             }
+        }
+
+        public void MovePosition(Cell cellToMove, int x, int y)
+        {
+
+        }
+
+        public int GetTotalPreys() => (from Cell cell in _board
+                                       where cell is Prey
+                                       select cell).Count();
+
+        public List<Cell> GetNeighbours(int x, int y)
+        {
+            List<Cell> neighbours = new();
+
+            for (int xPos = -1; xPos <= 1; xPos++)
+            {
+                for (int yPos = -1; yPos <= 1; yPos++)
+                {
+                    if (xPos == 0 && yPos == 0)
+                        continue;
+
+                    int newX = x + xPos;
+                    int newY = y + yPos;
+
+                    if (newX >= 0 && newX < _board.GetLength(1) && newY >= 0 && newY < _board.GetLength(0))
+                    {
+                        neighbours.Add(_board[newY, newX]);
+                    }
+                }
+            }
+
+            return neighbours;
         }
     }
 }
