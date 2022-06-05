@@ -140,5 +140,14 @@ namespace HunterAndPrey.Models
 
             return neighbours;
         }
+
+        public void KillPrey(Cell cell)
+        {
+            var empty = new Empty();
+            empty.X = cell.X;
+            empty.Y = cell.Y;
+            
+            _board[cell.Y, cell.X] = empty;
+        }
     }
 }

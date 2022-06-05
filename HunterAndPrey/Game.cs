@@ -35,7 +35,7 @@ namespace HunterAndPrey
                 //Se há, então elimina a Prey
                 if(neighbours.Any(cell => cell is Prey))
                 {
-                    //Elimina Prey
+                    board.KillPrey(neighbours.First(cell => cell is Prey));
                 }
                 //Se não
                 //Verificar se há alguma Prey na range do Hunter
