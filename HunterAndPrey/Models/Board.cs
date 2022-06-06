@@ -148,6 +148,6 @@ namespace HunterAndPrey.Models
             empty.Y = cell.Y;
             
             _board[cell.Y, cell.X] = empty;
-        }
+        }        
     }
 }
