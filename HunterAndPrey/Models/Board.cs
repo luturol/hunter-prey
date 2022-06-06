@@ -202,5 +202,13 @@ namespace HunterAndPrey.Models
         public List<Cell> GetPreys() => (from Cell cell in _board
                                        where cell is Prey
                                        select cell).ToList();
+
+        public Cell GetCell(int x, int y)
+        {
+            if(x >= 0 && x < _board.GetLength(1) && y >= 0 && y < _board.GetLength(0))
+                return _board[y, x];
+            else
+                return null;
+        }
     }
 }
