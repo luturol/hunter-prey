@@ -13,7 +13,7 @@ namespace HunterAndPrey.Models.States.Hunter
         {
             var neighbours = _board.GetNeighbours(_board.Hunter.X, _board.Hunter.Y);
                         
-           return neighbours.Any(cell => cell is Prey);            
+           return neighbours.Any(cell => cell is Models.Prey);            
         }
 
         public override void Enter()
@@ -21,9 +21,9 @@ namespace HunterAndPrey.Models.States.Hunter
             Console.WriteLine("Hunter matou uma Prey");
             var neighbours = _board.GetNeighbours(_board.Hunter.X, _board.Hunter.Y);
             
-            if (neighbours.Any(cell => cell is Prey))
+            if (neighbours.Any(cell => cell is Models.Prey))
             {            
-                _board.KillPrey(neighbours.First(cell => cell is Prey));
+                _board.KillPrey(neighbours.First(cell => cell is Models.Prey));
             }
         }
     }

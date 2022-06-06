@@ -23,6 +23,7 @@ namespace HunterAndPrey
             bool hasEnded = false;
 
             var hunterMachine = new HunterMachine(board);
+            var preyMachine = new PreyMachine(board);
 
             while (!hasEnded)
             {
@@ -38,7 +39,8 @@ namespace HunterAndPrey
                 Console.WriteLine("Quantidade de presas vivas: " + totalPreysAlive);
                 
                 hunterMachine.Play();
-
+                preyMachine.Play();
+                                
                 board.PrintBoard();
 
                 if(board.GetTotalPreys() == 0)

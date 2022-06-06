@@ -6,7 +6,6 @@ namespace HunterAndPrey.Models.States
 {
     public class HunterMachine
     {
-        private List<State> _states;
         private Board _board;
 
         private ChasePreyState _chasePreyState;

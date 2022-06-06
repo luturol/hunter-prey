@@ -115,10 +115,10 @@ namespace HunterAndPrey.Models
             empty.Y = cellToMove.Y;
 
             _board[cellToMove.Y, cellToMove.X] = empty;
-            _board[y, x] = Hunter;
+            _board[y, x] = cellToMove;
             
-            Hunter.X = x;
-            Hunter.Y = y;
+            cellToMove.X = x;
+            cellToMove.Y = y;
         }
 
         public int GetTotalPreys() => (from Cell cell in _board
@@ -198,5 +198,9 @@ namespace HunterAndPrey.Models
                 }                
             }
         }
+
+        public List<Cell> GetPreys() => (from Cell cell in _board
+                                       where cell is Prey
+                                       select cell).ToList();
     }
 }
