@@ -110,7 +110,11 @@ namespace HunterAndPrey.Models
 
         public void MovePosition(Cell cellToMove, int x, int y)
         {
-
+            _board[cellToMove.Y, cellToMove.X] = new Empty();
+            _board[y, x] = Hunter;
+            
+            Hunter.X = x;
+            Hunter.Y = y;
         }
 
         public int GetTotalPreys() => (from Cell cell in _board

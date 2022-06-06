@@ -47,6 +47,6 @@ namespace HunterAndPrey.Models.States
             {
                 _moveToRandomPos.Enter();
             }
-        }
+        }        
     }
 }

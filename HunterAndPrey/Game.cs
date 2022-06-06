@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Threading;
 using HunterAndPrey.Models;
 using HunterAndPrey.Models.States;
 
@@ -23,8 +24,8 @@ namespace HunterAndPrey
 
             var hunterMachine = new HunterMachine(board);
 
-            // while (!hasEnded)
-            // {
+            while (!hasEnded)
+            {
                 //Reset board empty cells
                 board.ResetEmptyCells();
 
@@ -41,8 +42,10 @@ namespace HunterAndPrey
                 board.PrintBoard();
 
                 if(board.GetTotalPreys() == 0)
-                    hasEnded = true;                
-            // }
+                    hasEnded = true;        
+
+                Thread.Sleep(1000);
+            }
 
             Console.WriteLine("Encerrou o jogo. O Caçador capturou todas as presas em " + rounds + " rounds");
 
