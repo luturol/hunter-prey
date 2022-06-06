@@ -173,5 +173,22 @@ namespace HunterAndPrey.Models
 
             return neighbours;
         }
+
+        public void ResetEmptyCells()
+        {
+            for (int i = 0; i < _board.GetLength(0); i++)
+            {                
+                for (int j = 0; j < _board.GetLength(1); j++)
+                {                    
+                    // row += Board[i, j].Content;
+                    var cell = _board[i, j];
+
+                    if(cell is Empty)
+                    {
+                        ((Empty) cell).SetColor(ConsoleColor.White);
+                    }                    
+                }                
+            }
+        }
     }
 }

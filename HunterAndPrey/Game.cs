@@ -25,6 +25,9 @@ namespace HunterAndPrey
 
             // while (!hasEnded)
             // {
+                //Reset board empty cells
+                board.ResetEmptyCells();
+
                 rounds++;
                 Console.WriteLine("Round: " + rounds);
                 
@@ -34,8 +37,9 @@ namespace HunterAndPrey
                 Console.WriteLine("Quantidade de presas vivas: " + totalPreysAlive);
                 
                 hunterMachine.Play();
-                         
+
                 board.PrintBoard();
+
                 if(board.GetTotalPreys() == 0)
                     hasEnded = true;                
             // }
