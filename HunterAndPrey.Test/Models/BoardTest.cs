@@ -35,5 +35,33 @@ namespace HunterAndPrey.Test.Models
                 Assert.True(cell.Y == y + 1 || cell.Y == y - 1 || cell.Y == y);                
             }
         }
+
+        [Fact]
+        public void ShouldBeAbleToMoveToAnotherPosition()
+        {
+            //Arrange
+            var neighbours = _board.GetNeighbours(_board.Hunter.X, _board.Hunter.Y);
+            var hunter = _board.Hunter;
+
+            var hunterX = hunter.X;
+            var hunterY = hunter.Y;
+
+            var cell = neighbours[0];
+
+            var cellX = cell.X;
+            var cellY = cell.Y;            
+
+            //Act
+            _board.MovePosition(hunter, cell.X, cell.Y);
+
+            //Assert
+            var cellReference = _board.GetCell(hunterX, hunterY);
+
+            Assert.Equal(hunter.X, cellX);
+            Assert.Equal(hunter.Y, cellY);
+            Assert.Equal(cellReference.X, hunterX);
+            Assert.Equal(cellReference.Y, hunterY);
+            Assert.IsType<Empty>(cellReference);
+        }
     }
 }
