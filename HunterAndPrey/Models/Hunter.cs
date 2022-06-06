@@ -7,7 +7,7 @@ namespace HunterAndPrey.Models
         public Hunter()
         {
             Content = "[H]";
-            Color = ConsoleColor.Green;
+            Color = ConsoleColor.DarkYellow;
         }
     }
 }

@@ -9,5 +9,7 @@ namespace HunterAndPrey.Models
             Content = "[-]";
             Color = ConsoleColor.White;
         }
+
+        public void SetColor(ConsoleColor color) => Color = color;
     }
 }

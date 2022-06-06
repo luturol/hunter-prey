@@ -146,8 +146,32 @@ namespace HunterAndPrey.Models
             var empty = new Empty();
             empty.X = cell.X;
             empty.Y = cell.Y;
-            
+
             _board[cell.Y, cell.X] = empty;
-        }        
+        }
+
+        public List<Cell> GetRange(int minX, int maxX, int minY, int maxY, int x, int y)
+        {
+            List<Cell> neighbours = new();
+
+            for (int xPos = minX; xPos <= maxX; xPos++)
+            {
+                for (int yPos = minY; yPos <= maxY; yPos++)
+                {
+                    if (xPos == 0 && yPos == 0)
+                        continue;
+
+                    int newX = x + xPos;
+                    int newY = y + yPos;
+
+                    if (newX >= 0 && newX < _board.GetLength(1) && newY >= 0 && newY < _board.GetLength(0))
+                    {
+                        neighbours.Add(_board[newY, newX]);
+                    }
+                }
+            }
+
+            return neighbours;
+        }
     }
 }

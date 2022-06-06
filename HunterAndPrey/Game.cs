@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using HunterAndPrey.Models;
+using HunterAndPrey.Models.States;
 
 namespace HunterAndPrey
 {
@@ -20,16 +21,19 @@ namespace HunterAndPrey
             int rounds = 0;
             bool hasEnded = false;
 
+            var hunterMachine = new HunterMachine(board);
+
             // while (!hasEnded)
             // {
                 rounds++;
                 Console.WriteLine("Round: " + rounds);
-                board.PrintBoard();
+                
 
                 var totalPreysAlive = board.GetTotalPreys();
 
                 Console.WriteLine("Quantidade de presas vivas: " + totalPreysAlive);
                 
+                hunterMachine.Play();
                 //Verifica se tem uma Prey adjacente ao Hunter
                 var neighbours = board.GetNeighbours(hunter.X, hunter.Y);
                 //Se há, então elimina a Prey
@@ -43,7 +47,7 @@ namespace HunterAndPrey
                 //Mover Hunter
 
                 //Mover Preys
-
+                board.PrintBoard();
                 if(board.GetTotalPreys() == 0)
                     hasEnded = true;                
             // }
