@@ -110,7 +110,11 @@ namespace HunterAndPrey.Models
 
         public void MovePosition(Cell cellToMove, int x, int y)
         {
-            _board[cellToMove.Y, cellToMove.X] = new Empty();
+            var empty = new Empty();
+            empty.X = cellToMove.X;
+            empty.Y = cellToMove.Y;
+
+            _board[cellToMove.Y, cellToMove.X] = empty;
             _board[y, x] = Hunter;
             
             Hunter.X = x;

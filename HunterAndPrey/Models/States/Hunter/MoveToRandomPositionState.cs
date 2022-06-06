@@ -22,6 +22,7 @@ namespace HunterAndPrey.Models.States.Hunter
 
             var randomPos = neighbours[new Random().Next(0, neighbours.Count() - 1)];
 
+            Console.WriteLine($"Posicação atual do Hunter: x = {_board.Hunter.X} y = {_board.Hunter.Y} posição para qual vai se mover x = {randomPos.X} y = {randomPos.Y}");
             _board.MovePosition(_board.Hunter, randomPos.X, randomPos.Y);
         }
     }
