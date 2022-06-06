@@ -1,10 +1,30 @@
+using System;
+using System.Linq;
+
 namespace HunterAndPrey.Models.States.Hunter
 {
     public class KillPreyState : State
     {
-        protected override bool CanEnter()
+        public KillPreyState(Board board) : base(board)
         {
-            throw new System.NotImplementedException();
+        }
+
+        public override bool CanEnter()
+        {
+            var neighbours = _board.GetNeighbours(_board.Hunter.X, _board.Hunter.Y);
+                        
+           return neighbours.Any(cell => cell is Prey);            
+        }
+
+        public override void Enter()
+        {
+            Console.WriteLine("Hunter matou uma Prey");
+            var neighbours = _board.GetNeighbours(_board.Hunter.X, _board.Hunter.Y);
+            
+            if (neighbours.Any(cell => cell is Prey))
+            {            
+                _board.KillPrey(neighbours.First(cell => cell is Prey));
+            }
         }
     }
 }

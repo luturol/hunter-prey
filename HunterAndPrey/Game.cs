@@ -34,19 +34,7 @@ namespace HunterAndPrey
                 Console.WriteLine("Quantidade de presas vivas: " + totalPreysAlive);
                 
                 hunterMachine.Play();
-                //Verifica se tem uma Prey adjacente ao Hunter
-                var neighbours = board.GetNeighbours(hunter.X, hunter.Y);
-                //Se há, então elimina a Prey
-                if(neighbours.Any(cell => cell is Prey))
-                {
-                    board.KillPrey(neighbours.First(cell => cell is Prey));
-                }
-                //Se não
-                //Verificar se há alguma Prey na range do Hunter
-                
-                //Mover Hunter
-
-                //Mover Preys
+                         
                 board.PrintBoard();
                 if(board.GetTotalPreys() == 0)
                     hasEnded = true;                

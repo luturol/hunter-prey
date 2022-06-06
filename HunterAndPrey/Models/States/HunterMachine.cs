@@ -9,16 +9,17 @@ namespace HunterAndPrey.Models.States
         private List<State> _states;
         private Board _board;
 
+        private ChasePreyState _chasePreyState;
+        private KillPreyState _killPreyState;
+        private MoveToRandomPositionState _moveToRandomPos;
+
         public HunterMachine(Board board)
         {
             _board = board;
 
-            _states = new List<State>()
-            {
-                new ChasePreyState(),
-                new KillPreyState(),
-                new MoveToRandomPositionState()
-            };
+            _chasePreyState = new ChasePreyState(_board);
+            _killPreyState = new KillPreyState(_board);
+            _moveToRandomPos = new MoveToRandomPositionState(_board);
         }
 
         public void Play()
@@ -26,13 +27,26 @@ namespace HunterAndPrey.Models.States
             var hunter = _board.Hunter;
             var range = _board.GetRange(-5, 5, -5, 5, hunter.X, hunter.Y);
 
-            foreach(Cell cell in range)
+            foreach (Cell cell in range)
             {
-                if(cell is Empty)
+                if (cell is Empty)
                 {
-                    ((Empty) cell).SetColor(ConsoleColor.Green);
+                    ((Empty)cell).SetColor(ConsoleColor.Green);
                 }
-            }            
+            }
+
+            if (_killPreyState.CanEnter())
+            {
+                _killPreyState.Enter();
+            }
+            else if(_chasePreyState.CanEnter())
+            {
+                _chasePreyState.Enter();
+            }
+            else if(_moveToRandomPos.CanEnter())
+            {
+                _moveToRandomPos.Enter();
+            }
         }
     }
 }
