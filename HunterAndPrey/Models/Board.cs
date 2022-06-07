@@ -29,7 +29,7 @@ namespace HunterAndPrey.Models
 
             Console.WriteLine("Criando o Tabuleiro");
 
-            //Populando presas
+            #region Populando presas
             Console.WriteLine($"Total de Presas = {numberOfPreys}");
             for (int i = 0; i < numberOfPreys; i++)
             {
@@ -52,8 +52,9 @@ namespace HunterAndPrey.Models
                     }
                 }
             }
+            #endregion Populando presas
 
-            //Populando Caçador
+            #region Populando Caçador
             Console.WriteLine("Colocando o Caçador");
             bool isHunterOnBoard = false;
             Hunter = new Hunter();
@@ -72,7 +73,9 @@ namespace HunterAndPrey.Models
                     Console.WriteLine($"Colocou Caçador na posição X = {randomX} e Y = {randomY}");
                 }
             }
+            #endregion Populando Caçador
 
+            #region Populando com vazio
             Console.WriteLine("Populando com vazio o tabuleiro");
             for (int i = 0; i < 30; i++)
             {
@@ -87,6 +90,7 @@ namespace HunterAndPrey.Models
                     }
                 }
             }
+            #endregion Populando com vazio
 
             return board;
         }

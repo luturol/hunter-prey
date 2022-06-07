@@ -16,7 +16,11 @@ namespace HunterAndPrey.Models.States.Hunter
         public override void Enter()
         {
             Console.WriteLine("Hunter está perseguindo uma presa");
-            throw new System.NotImplementedException();
+
+            //Calcular Path para o mais próximo com A*            
+            //Verifica se precisa rotacionar
+            //Se rotacionar, gira e termina o turno do hunter
+            //Se não, se move em direção ao target
         }
     }
 }
