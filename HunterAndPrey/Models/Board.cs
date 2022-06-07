@@ -91,6 +91,9 @@ namespace HunterAndPrey.Models
             return board;
         }
 
+        /// <summary>
+        /// Imprime o tabuleiro no console
+        /// </summary>
         public void PrintBoard()
         {
             Console.WriteLine();
@@ -108,6 +111,12 @@ namespace HunterAndPrey.Models
             }
         }
 
+        /// <summary>
+        /// Move a cellToMove para a posição Y,X
+        /// </summary>
+        /// <param name="cellToMove"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
         public void MovePosition(Cell cellToMove, int x, int y)
         {
             var empty = new Empty();
@@ -116,39 +125,26 @@ namespace HunterAndPrey.Models
 
             _board[cellToMove.Y, cellToMove.X] = empty;
             _board[y, x] = cellToMove;
-            
+
             cellToMove.X = x;
             cellToMove.Y = y;
         }
 
-        public int GetTotalPreys() => (from Cell cell in _board
-                                       where cell is Prey
-                                       select cell).Count();
-
+        /// <summary>
+        /// Pega células vizinhas
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <returns></returns>
         public List<Cell> GetNeighbours(int x, int y)
         {
-            List<Cell> neighbours = new();
-
-            for (int xPos = -1; xPos <= 1; xPos++)
-            {
-                for (int yPos = -1; yPos <= 1; yPos++)
-                {
-                    if (xPos == 0 && yPos == 0)
-                        continue;
-
-                    int newX = x + xPos;
-                    int newY = y + yPos;
-
-                    if (newX >= 0 && newX < _board.GetLength(1) && newY >= 0 && newY < _board.GetLength(0))
-                    {
-                        neighbours.Add(_board[newY, newX]);
-                    }
-                }
-            }
-
-            return neighbours;
+            return GetRange(-1, 1, -1, 1, x, y);
         }
 
+        /// <summary>
+        /// Mata a presa
+        /// </summary>
+        /// <param name="cell"></param>
         public void KillPrey(Cell cell)
         {
             var empty = new Empty();
@@ -158,6 +154,16 @@ namespace HunterAndPrey.Models
             _board[cell.Y, cell.X] = empty;
         }
 
+        /// <summary>
+        /// Pega todas as células na range X,Y
+        /// </summary>
+        /// <param name="minX"></param>
+        /// <param name="maxX"></param>
+        /// <param name="minY"></param>
+        /// <param name="maxY"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <returns></returns>
         public List<Cell> GetRange(int minX, int maxX, int minY, int maxY, int x, int y)
         {
             List<Cell> neighbours = new();
@@ -172,7 +178,7 @@ namespace HunterAndPrey.Models
                     int newX = x + xPos;
                     int newY = y + yPos;
 
-                    if (newX >= 0 && newX < _board.GetLength(1) && newY >= 0 && newY < _board.GetLength(0))
+                    if (IsValidPosition(newX, newY))
                     {
                         neighbours.Add(_board[newY, newX]);
                     }
@@ -182,33 +188,60 @@ namespace HunterAndPrey.Models
             return neighbours;
         }
 
+        /// <summary>
+        /// Reseta a cor das células vazias
+        /// </summary>
         public void ResetEmptyCells()
         {
             for (int i = 0; i < _board.GetLength(0); i++)
-            {                
+            {
                 for (int j = 0; j < _board.GetLength(1); j++)
-                {                    
+                {
                     // row += Board[i, j].Content;
                     var cell = _board[i, j];
 
-                    if(cell is Empty)
+                    if (cell is Empty)
                     {
-                        ((Empty) cell).SetColor(ConsoleColor.White);
-                    }                    
-                }                
+                        ((Empty)cell).SetColor(ConsoleColor.White);
+                    }
+                }
             }
         }
 
+        /// <summary>
+        /// Pega todas as Presas do Tabuleiro
+        /// </summary>
+        /// <returns></returns>
         public List<Cell> GetPreys() => (from Cell cell in _board
-                                       where cell is Prey
-                                       select cell).ToList();
+                                         where cell is Prey
+                                         select cell).ToList();
 
+        /// <summary>
+        /// Pega o total de presas
+        /// </summary>
+        /// <returns></returns>
+        public int GetTotalPreys() => GetPreys().Count();
+        
+        /// <summary>
+        /// Pega a Celula Y,X
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <returns></returns>
         public Cell GetCell(int x, int y)
         {
-            if(x >= 0 && x < _board.GetLength(1) && y >= 0 && y < _board.GetLength(0))
+            if (IsValidPosition(x, y))
                 return _board[y, x];
             else
                 return null;
         }
+
+        /// <summary>
+        /// Valida se a posição informada é válida
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <returns></returns>
+        private bool IsValidPosition(int x, int y) => x >= 0 && x < _board.GetLength(1) && y >= 0 && y < _board.GetLength(0);
     }
 }
