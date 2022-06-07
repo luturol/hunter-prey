@@ -23,7 +23,10 @@ namespace HunterAndPrey.Models.States.Hunter
             
             if (neighbours.Any(cell => cell is Models.Prey))
             {            
-                _board.KillPrey(neighbours.First(cell => cell is Models.Prey));
+                var prey = neighbours.First(cell => cell is Models.Prey)
+                _board.KillPrey(prey);
+
+                _board.MovePosition(_board.Hunter, prey.X, prey.Y);
             }
         }
     }
