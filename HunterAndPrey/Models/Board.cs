@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using HunterAndPrey.Extensions;
+using HunterAndPrey.Models.AStar;
 
 namespace HunterAndPrey.Models
 {
@@ -12,7 +13,7 @@ namespace HunterAndPrey.Models
 
         public Board(int numberOfPreys, int xSize, int ySize)
         {
-            _board = CreateBoard(numberOfPreys, xSize, ySize);            
+            _board = CreateBoard(numberOfPreys, xSize, ySize);
         }
 
 
@@ -110,6 +111,33 @@ namespace HunterAndPrey.Models
                     var cell = _board[i, j];
                     Console.ForegroundColor = cell.Color;
                     Console.Write(_board[i, j].Content);
+                }
+                Console.WriteLine(row);
+            }
+        }
+
+        public void PrintBoard(List<Node> path)
+        {
+            Console.WriteLine();
+            for (int i = 0; i < _board.GetLength(0); i++)
+            {
+                string row = string.Empty;
+                for (int j = 0; j < _board.GetLength(1); j++)
+                {
+                    if (path.Any(e => e.GridX == j && e.GridY == i) && _board[i, j] is Empty)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.Write("[*]");
+                    }
+                    else
+                    {
+                        var cell = _board[i, j];
+                        Console.ForegroundColor = cell.Color;
+                        Console.Write(_board[i, j].Content);
+                    }
+
+                    // row += Board[i, j].Content;
+
                 }
                 Console.WriteLine(row);
             }
@@ -225,7 +253,7 @@ namespace HunterAndPrey.Models
         /// </summary>
         /// <returns></returns>
         public int GetTotalPreys() => GetPreys().Count();
-        
+
         /// <summary>
         /// Pega a Celula Y,X
         /// </summary>

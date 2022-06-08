@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using System.Threading;
 using HunterAndPrey.Models;
+using HunterAndPrey.Models.AStar;
 using HunterAndPrey.Models.States;
 
 namespace HunterAndPrey
@@ -25,14 +26,13 @@ namespace HunterAndPrey
             var hunterMachine = new HunterMachine(board);
             var preyMachine = new PreyMachine(board);
 
-            while (!hasEnded)
-            {
+            // while (!hasEnded)
+            // {
                 //Reset board empty cells
                 board.ResetEmptyCells();
 
                 rounds++;
-                Console.WriteLine("Round: " + rounds);
-                
+                Console.WriteLine("Round: " + rounds);                
 
                 var totalPreysAlive = board.GetTotalPreys();
 
@@ -43,11 +43,23 @@ namespace HunterAndPrey
                                 
                 board.PrintBoard();
 
+                var prey = board.GetPreys().First();
+
+                //Testando A*
+                Grid grid = new Grid(30, 30);
+                Path path = new Path(grid);
+                path.FindPath(new Vector2(hunter.X, hunter.Y), new Vector2(prey.X, prey.Y));
+
+                var pathToFollow = grid.Path;
+                
+                board.PrintBoard(pathToFollow);
+
+
                 if(board.GetTotalPreys() == 0)
                     hasEnded = true;        
 
                 Thread.Sleep(1000);
-            }
+            // }
 
             Console.WriteLine("Encerrou o jogo. O Caçador capturou todas as presas em " + rounds + " rounds");
 
@@ -58,5 +70,6 @@ namespace HunterAndPrey
         /// </summary>
         /// <returns></returns>
         public int GetRandomNumberOfPreys() => new Random().Next(5, 10);
+        
     }
 }
