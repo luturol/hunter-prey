@@ -8,11 +8,11 @@ namespace HunterAndPrey.Models
     public class Board
     {
         private Cell[,] _board;
-
         public Hunter Hunter { get; private set; }
+
         public Board(int numberOfPreys, int xSize, int ySize)
         {
-            _board = CreateBoard(numberOfPreys, xSize, ySize);
+            _board = CreateBoard(numberOfPreys, xSize, ySize);            
         }
 
 
@@ -182,7 +182,7 @@ namespace HunterAndPrey.Models
                     int newX = x + xPos;
                     int newY = y + yPos;
 
-                    if (IsValidPosition(newX, newY))
+                    if (_board.IsValidPosition(newX, newY))
                     {
                         neighbours.Add(_board[newY, newX]);
                     }
@@ -234,18 +234,10 @@ namespace HunterAndPrey.Models
         /// <returns></returns>
         public Cell GetCell(int x, int y)
         {
-            if (IsValidPosition(x, y))
+            if (_board.IsValidPosition(x, y))
                 return _board[y, x];
             else
                 return null;
         }
-
-        /// <summary>
-        /// Valida se a posição informada é válida
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <returns></returns>
-        private bool IsValidPosition(int x, int y) => x >= 0 && x < _board.GetLength(1) && y >= 0 && y < _board.GetLength(0);
     }
 }
