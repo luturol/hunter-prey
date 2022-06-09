@@ -18,7 +18,7 @@ namespace HunterAndPrey.Enums
     {
         public static Direction Random() => (Direction)new Random().Next(0, Enum.GetNames(typeof(Direction)).Length);
 
-        public static Direction GetDirectionFromOnCellToAnother(int x1, int y1, int x2, int y2)
+        public static Direction GetDirectionFromOnCellToAnother(int x1, int y1, int x2, int y2)        
         {
             if (x2 < x1 && y2 < y1)
             {
@@ -63,6 +63,31 @@ namespace HunterAndPrey.Enums
             else
             {
                 return Direction.North;
+            }
+        }
+
+        public static ConsoleColor Color(Direction direction)
+        {
+            switch (direction)
+            {
+                case Direction.North:
+                    return ConsoleColor.Blue;
+                case Direction.NorthEast:
+                    return ConsoleColor.Cyan;
+                case Direction.Northwest:
+                    return ConsoleColor.Gray;
+                case Direction.East:
+                    return ConsoleColor.Green;
+                case Direction.West:
+                    return ConsoleColor.Magenta;
+                case Direction.South:
+                    return ConsoleColor.Red;
+                case Direction.Southeast:
+                    return ConsoleColor.Black;
+                case Direction.SouthWest:
+                    return ConsoleColor.Yellow;
+                default:
+                    return ConsoleColor.Yellow;
             }
         }
     }

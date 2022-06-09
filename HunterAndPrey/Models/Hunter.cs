@@ -16,7 +16,7 @@ namespace HunterAndPrey.Models
             {
                 _direction = value;
 
-                Color = HunterColor(FacingDirection);
+                Color = DirectionHelper.Color(FacingDirection);
             }
         }
 
@@ -25,29 +25,6 @@ namespace HunterAndPrey.Models
             Content = "[H]";
         }
 
-        private ConsoleColor HunterColor(Direction direction)
-        {
-            switch (direction)
-            {
-                case Direction.North:
-                    return ConsoleColor.Blue;
-                case Direction.NorthEast:
-                    return ConsoleColor.Cyan;
-                case Direction.Northwest:
-                    return ConsoleColor.Gray;
-                case Direction.East:
-                    return ConsoleColor.Green;
-                case Direction.West:
-                    return ConsoleColor.Magenta;
-                case Direction.South:
-                    return ConsoleColor.Red;
-                case Direction.Southeast:
-                    return ConsoleColor.Black;
-                case Direction.SouthWest:
-                    return ConsoleColor.Yellow;
-                default:
-                    return ConsoleColor.Yellow;
-            }
-        }
+        
     }
 }

@@ -49,8 +49,8 @@ namespace HunterAndPrey.Models.States.Hunter
                 //Recalcula o Path até a presa mais próxima
                 path.FindPath(new Vector2(_board.Hunter.X, _board.Hunter.Y), new Vector2(nearstCell.X, nearstCell.Y));
 
-                #if DEBUG
-                //Printa o board por motivos de Debug, remover isso depois
+                #if DEBUG                
+                Console.WriteLine("Imprimindo o tabuleiro com o Pathfinding calculado");
                 _board.PrintBoard(grid.Path);
                 #endif
                 
