@@ -19,7 +19,9 @@ namespace HunterAndPrey.Models.States.Hunter
 
         public override bool CanEnter()
         {
-            return false;
+            var range = _board.GetRange(-5, 5, -5, 5, _board.Hunter.X, _board.Hunter.Y);
+
+            return range.Any(cell => cell is Models.Prey);
         }
 
         public override void Enter()
@@ -29,11 +31,21 @@ namespace HunterAndPrey.Models.States.Hunter
             if (range.Any(cell => cell is Models.Prey))
             {
                 Console.WriteLine("Caçador está perseguindo uma presa");
-                var nearstCell = range.OrderByDescending(cell => Vector2.GetDistance(_board.Hunter.X, _board.Hunter.Y, cell.X, cell.Y)).First();
-
                 Grid grid = new Grid(30, 30);
                 Path path = new Path(grid);
+
+                var nearstCell = range.Where(cell => cell is Models.Prey)
+                    .OrderBy(cell =>
+                    {
+                        path.FindPath(new Vector2(_board.Hunter.X, _board.Hunter.Y), new Vector2(cell.X, cell.Y));
+                        return grid.Path.Count;
+                    })
+                    .First();
+
+
                 path.FindPath(new Vector2(_board.Hunter.X, _board.Hunter.Y), new Vector2(nearstCell.X, nearstCell.Y));
+
+                _board.PrintBoard(grid.Path);
 
                 var pathToFollow = grid.Path;
 
@@ -57,7 +69,5 @@ namespace HunterAndPrey.Models.States.Hunter
                 }
             }
         }
-
-      
     }
 }

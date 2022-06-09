@@ -26,8 +26,8 @@ namespace HunterAndPrey
             var hunterMachine = new HunterMachine(board);
             var preyMachine = new PreyMachine(board);
 
-            // while (!hasEnded)
-            // {
+            while (!hasEnded)
+            {
                 //Reset board empty cells
                 board.ResetEmptyCells();
 
@@ -44,22 +44,18 @@ namespace HunterAndPrey
                 board.PrintBoard();
 
                 var prey = board.GetPreys().First();
-
-                //Testando A*
-                Grid grid = new Grid(30, 30);
-                Path path = new Path(grid);
-                path.FindPath(new Vector2(hunter.X, hunter.Y), new Vector2(prey.X, prey.Y));
-
-                var pathToFollow = grid.Path;
                 
-                // board.PrintBoard(pathToFollow);
+                // Grid grid = new Grid(30, 30);
+                // Path path = new Path(grid);
+                // path.FindPath(new Vector2(hunter.X, hunter.Y), new Vector2(prey.X, prey.Y));
+                // board.PrintBoard(grid.Path);
 
 
                 if(board.GetTotalPreys() == 0)
                     hasEnded = true;        
 
-                Thread.Sleep(1000);
-            // }
+                Thread.Sleep(10000);
+            }
 
             Console.WriteLine("Encerrou o jogo. O Caçador capturou todas as presas em " + rounds + " rounds");
 

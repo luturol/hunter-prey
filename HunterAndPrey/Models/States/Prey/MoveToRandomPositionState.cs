@@ -21,7 +21,7 @@ namespace HunterAndPrey.Models.States.Prey
         {
             Console.WriteLine("Movendo presas");
 
-            var neighbours = _board.GetNeighbours(_cell.X, _cell.Y);
+            var neighbours = _board.GetNeighbours(_cell.X, _cell.Y).Where(cell => cell is Empty).ToList();
 
             var randomPos = neighbours[new Random().Next(0, neighbours.Count() - 1)];
 

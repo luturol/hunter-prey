@@ -27,12 +27,83 @@ namespace HunterAndPrey.Models.States.Hunter
                 if (randomDirection == _board.Hunter.FacingDirection)
                 {
                     //Move to facing direction
+                    Console.WriteLine("Caçador andou uma posição na diração " + _board.Hunter.FacingDirection);
                     if (_board.Hunter.FacingDirection == Direction.South)
-                    {
-                        Console.WriteLine("Caçador andou uma posição na diração " + _board.Hunter.FacingDirection);
+                    {                        
                         var nextPosition = neighbours.FirstOrDefault(cell => cell.Y == _board.Hunter.Y + 1);
                         if (nextPosition is not null)
                         {
+                            Console.WriteLine($"Caçador andou da posição x,y {_board.Hunter.X},{_board.Hunter.Y} para {nextPosition.X},{nextPosition.Y}");
+                            _board.MovePosition(_board.Hunter, nextPosition.X, nextPosition.Y);
+                            hasSetNewPosition = true;
+                        }
+                    }
+                    else if (_board.Hunter.FacingDirection == Direction.Southeast)
+                    {                        
+                        var nextPosition = neighbours.FirstOrDefault(cell => cell.Y == _board.Hunter.Y + 1 && cell.X == _board.Hunter.X + 1);
+                        if (nextPosition is not null)
+                        {
+                            Console.WriteLine($"Caçador andou da posição x,y {_board.Hunter.X},{_board.Hunter.Y} para {nextPosition.X},{nextPosition.Y}");
+                            _board.MovePosition(_board.Hunter, nextPosition.X, nextPosition.Y);
+                            hasSetNewPosition = true;
+                        }
+                    }
+                    else if (_board.Hunter.FacingDirection == Direction.SouthWest)
+                    {                        
+                        var nextPosition = neighbours.FirstOrDefault(cell => cell.Y == _board.Hunter.Y + 1 && cell.X == _board.Hunter.X - 1);
+                        if (nextPosition is not null)
+                        {
+                            Console.WriteLine($"Caçador andou da posição x,y {_board.Hunter.X},{_board.Hunter.Y} para {nextPosition.X},{nextPosition.Y}");
+                            _board.MovePosition(_board.Hunter, nextPosition.X, nextPosition.Y);
+                            hasSetNewPosition = true;
+                        }
+                    }
+                    else if (_board.Hunter.FacingDirection == Direction.East)
+                    {                        
+                        var nextPosition = neighbours.FirstOrDefault(cell => cell.Y == _board.Hunter.Y && cell.X == _board.Hunter.X + 1);
+                        if (nextPosition is not null)
+                        {
+                            Console.WriteLine($"Caçador andou da posição x,y {_board.Hunter.X},{_board.Hunter.Y} para {nextPosition.X},{nextPosition.Y}");
+                            _board.MovePosition(_board.Hunter, nextPosition.X, nextPosition.Y);
+                            hasSetNewPosition = true;
+                        }
+                    }
+                    else if (_board.Hunter.FacingDirection == Direction.West)
+                    {                        
+                        var nextPosition = neighbours.FirstOrDefault(cell => cell.Y == _board.Hunter.Y && cell.X == _board.Hunter.X - 1);
+                        if (nextPosition is not null)
+                        {
+                            Console.WriteLine($"Caçador andou da posição x,y {_board.Hunter.X},{_board.Hunter.Y} para {nextPosition.X},{nextPosition.Y}");
+                            _board.MovePosition(_board.Hunter, nextPosition.X, nextPosition.Y);
+                            hasSetNewPosition = true;
+                        }
+                    }
+                    else if (_board.Hunter.FacingDirection == Direction.North)
+                    {                        
+                        var nextPosition = neighbours.FirstOrDefault(cell => cell.Y == _board.Hunter.Y - 1 && cell.X == _board.Hunter.X);
+                        if (nextPosition is not null)
+                        {
+                            Console.WriteLine($"Caçador andou da posição x,y {_board.Hunter.X},{_board.Hunter.Y} para {nextPosition.X},{nextPosition.Y}");
+                            _board.MovePosition(_board.Hunter, nextPosition.X, nextPosition.Y);
+                            hasSetNewPosition = true;
+                        }
+                    }
+                    else if (_board.Hunter.FacingDirection == Direction.NorthEast)
+                    {                        
+                        var nextPosition = neighbours.FirstOrDefault(cell => cell.Y == _board.Hunter.Y - 1 && cell.X == _board.Hunter.X + 1);
+                        if (nextPosition is not null)
+                        {
+                            Console.WriteLine($"Caçador andou da posição x,y {_board.Hunter.X},{_board.Hunter.Y} para {nextPosition.X},{nextPosition.Y}");
+                            _board.MovePosition(_board.Hunter, nextPosition.X, nextPosition.Y);
+                            hasSetNewPosition = true;
+                        }
+                    }
+                    else if (_board.Hunter.FacingDirection == Direction.Northwest)
+                    {                        
+                        var nextPosition = neighbours.FirstOrDefault(cell => cell.Y == _board.Hunter.Y - 1 && cell.X == _board.Hunter.X - 1);
+                        if (nextPosition is not null)
+                        {
+                            Console.WriteLine($"Caçador andou da posição x,y {_board.Hunter.X},{_board.Hunter.Y} para {nextPosition.X},{nextPosition.Y}");
                             _board.MovePosition(_board.Hunter, nextPosition.X, nextPosition.Y);
                             hasSetNewPosition = true;
                         }
