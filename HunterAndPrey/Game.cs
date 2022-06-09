@@ -43,13 +43,7 @@ namespace HunterAndPrey
                                 
                 board.PrintBoard();
 
-                var prey = board.GetPreys().First();
-                
-                // Grid grid = new Grid(30, 30);
-                // Path path = new Path(grid);
-                // path.FindPath(new Vector2(hunter.X, hunter.Y), new Vector2(prey.X, prey.Y));
-                // board.PrintBoard(grid.Path);
-
+                var prey = board.GetPreys().First();                
 
                 if(board.GetTotalPreys() == 0)
                     hasEnded = true;        
