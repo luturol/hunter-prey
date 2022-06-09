@@ -11,9 +11,13 @@ namespace HunterAndPrey.Models
     {
         private Cell[,] _board;
         public Hunter Hunter { get; private set; }
+        public int XSize { get; private set; }
+        public int YSize { get; private set; }
 
         public Board(int numberOfPreys, int xSize, int ySize)
         {
+            XSize = xSize;
+            YSize = ySize;
             _board = CreateBoard(numberOfPreys, xSize, ySize);
         }
 
@@ -83,9 +87,9 @@ namespace HunterAndPrey.Models
 
             #region Populando com vazio
             Console.WriteLine("Populando com vazio o tabuleiro");
-            for (int i = 0; i < 30; i++)
+            for (int i = 0; i < ySize; i++)
             {
-                for (int j = 0; j < 30; j++)
+                for (int j = 0; j < xSize; j++)
                 {
                     if (board[i, j] == null)
                     {

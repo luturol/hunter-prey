@@ -31,7 +31,7 @@ namespace HunterAndPrey.Models.States.Hunter
             if (range.Any(cell => cell is Models.Prey))
             {
                 Console.WriteLine("Caçador está perseguindo uma presa");
-                Grid grid = new Grid(30, 30);
+                Grid grid = new Grid(_board.XSize, _board.YSize);
                 Path path = new Path(grid);
 
                 var nearstCell = range.Where(cell => cell is Models.Prey)
