@@ -26,8 +26,10 @@ namespace HunterAndPrey.Models.States.Hunter
                 var randomDirection = DirectionHelper.Random();
                 if (randomDirection == _board.Hunter.FacingDirection)
                 {
-                    //Move to facing direction
+                    //Move to facing direction                    
                     Console.WriteLine("Caçador andou uma posição na diração " + _board.Hunter.FacingDirection);
+
+                    #region Direction Validation
                     if (_board.Hunter.FacingDirection == Direction.South)
                     {                        
                         var nextPosition = neighbours.FirstOrDefault(cell => cell.Y == _board.Hunter.Y + 1);
@@ -108,6 +110,7 @@ namespace HunterAndPrey.Models.States.Hunter
                             hasSetNewPosition = true;
                         }
                     }
+                    #endregion Direction Validation
                 }
                 else
                 {
