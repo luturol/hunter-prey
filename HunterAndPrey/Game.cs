@@ -52,7 +52,7 @@ namespace HunterAndPrey
 
                 var pathToFollow = grid.Path;
                 
-                board.PrintBoard(pathToFollow);
+                // board.PrintBoard(pathToFollow);
 
 
                 if(board.GetTotalPreys() == 0)

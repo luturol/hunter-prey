@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using HunterAndPrey.Enums;
 using HunterAndPrey.Extensions;
 using HunterAndPrey.Models.AStar;
 
@@ -59,6 +60,10 @@ namespace HunterAndPrey.Models
             Console.WriteLine("Colocando o Caçador");
             bool isHunterOnBoard = false;
             Hunter = new Hunter();
+
+            var direction = (Direction)new Random().Next(1, 8);
+            Hunter.FacingDirection = direction;
+
             while (isHunterOnBoard == false)
             {
                 (int randomX, int randomY) = board.GetRandomXAndY();
@@ -107,9 +112,10 @@ namespace HunterAndPrey.Models
                 string row = string.Empty;
                 for (int j = 0; j < _board.GetLength(1); j++)
                 {
-                    // row += Board[i, j].Content;
                     var cell = _board[i, j];
+
                     Console.ForegroundColor = cell.Color;
+
                     Console.Write(_board[i, j].Content);
                 }
                 Console.WriteLine(row);
