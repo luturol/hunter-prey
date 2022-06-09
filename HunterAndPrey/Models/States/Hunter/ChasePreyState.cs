@@ -31,9 +31,12 @@ namespace HunterAndPrey.Models.States.Hunter
             if (range.Any(cell => cell is Models.Prey))
             {
                 Console.WriteLine("Caçador está perseguindo uma presa");
+
+                //Cria grid para o A*
                 Grid grid = new Grid(_board.XSize, _board.YSize);
                 Path path = new Path(grid);
 
+                //Pega a presa mais próxima com o menor Path pelo A*
                 var nearstCell = range.Where(cell => cell is Models.Prey)
                     .OrderBy(cell =>
                     {
@@ -43,10 +46,14 @@ namespace HunterAndPrey.Models.States.Hunter
                     .First();
 
 
+                //Recalcula o Path até a presa mais próxima
                 path.FindPath(new Vector2(_board.Hunter.X, _board.Hunter.Y), new Vector2(nearstCell.X, nearstCell.Y));
 
+                #if DEBUG
+                //Printa o board por motivos de Debug, remover isso depois
                 _board.PrintBoard(grid.Path);
-
+                #endif
+                
                 var pathToFollow = grid.Path;
 
                 if (pathToFollow.Count > 0)
