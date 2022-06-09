@@ -17,5 +17,53 @@ namespace HunterAndPrey.Enums
     public static class DirectionHelper
     {
         public static Direction Random() => (Direction)new Random().Next(0, Enum.GetNames(typeof(Direction)).Length);
+
+        public static Direction GetDirectionFromOnCellToAnother(int x1, int y1, int x2, int y2)
+        {
+            if (x2 < x1 && y2 < y1)
+            {
+                //olhando diagonal superior esquerda
+                return Direction.Northwest;
+            }
+            else if (x2 > x1 && y2 < y1)
+            {
+                //olhando diagonal superior direita
+                return Direction.NorthEast;
+            }
+            else if (x2 == x1 && y2 < y1)
+            {
+                //olhando para cima
+                return Direction.North;
+            }
+            else if (x2 < x1 && y2 == y1)
+            {
+                //olhando para esquerda
+                return Direction.West;
+            }
+            else if (x2 > x1 && y2 == y1)
+            {
+                //olhando para direita
+                return Direction.East;
+            }
+            else if (x2 < x1 && y2 > y1)
+            {
+                //olhando para diagonal inferior esquerda
+                return Direction.SouthWest;
+            }
+            else if (x2 > x1 && y2 > y1)
+            {
+                //olhando para diagonal inferior direita
+                return Direction.Southeast;
+            }
+            else if (x2 == x1 && y2 > y1)
+            {
+                //olhando para diagonal inferior direita
+                return Direction.South;
+            }
+            else
+            {
+                return Direction.North;
+            }
+        }
     }
 }
