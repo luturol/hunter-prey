@@ -117,10 +117,6 @@ namespace HunterAndPrey.Models.States.Hunter
                     Console.WriteLine("Caçador mudou de direção. Foi da " + _board.Hunter.FacingDirection + " para " + randomDirection);
                     _board.Hunter.FacingDirection = randomDirection;
                     hasSetNewPosition = true;
-                    // var randomPos = neighbours[new Random().Next(0, neighbours.Count() - 1)];
-
-                    // Console.WriteLine($"Posicação atual do Hunter: x = {_board.Hunter.X} y = {_board.Hunter.Y} posição para qual vai se mover x = {randomPos.X} y = {randomPos.Y}");
-                    // _board.MovePosition(_board.Hunter, randomPos.X, randomPos.Y);
                 }
             }
         }
