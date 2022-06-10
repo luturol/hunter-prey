@@ -15,7 +15,7 @@ namespace HunterAndPrey
         /// </summary>
         public void Start()
         {
-            Console.WriteLine("Informe o tempo em milisegundos entre rounds:");
+            Console.WriteLine("Informe o tempo em milissegundos entre rounds:");
             var time = Console.ReadLine();
 
             int timeMilisseconds;
